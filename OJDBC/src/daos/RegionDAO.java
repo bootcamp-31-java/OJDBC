@@ -59,14 +59,14 @@ public class RegionDAO implements IRegionDAO {
         }
         return listRegion;
     }
-
+    
     @Override
     public List<Region> search(String key) {
         List<Region> listRegion = new ArrayList<Region>();
         String query = "SELECT * FROM HR.REGIONS WHERE REGION_ID like ? or REGION_NAME like ?";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            
+
             preparedStatement.setString(1, "%" + key + "%");
             preparedStatement.setString(2, "%" + key + "%");
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -88,7 +88,7 @@ public class RegionDAO implements IRegionDAO {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1, r.getId());
             preparedStatement.setString(2, r.getName());
-            preparedStatement.executeQuery();
+            ResultSet executeQuery = preparedStatement.executeQuery();
             result = true;
         } catch (Exception e) {
             e.printStackTrace();
