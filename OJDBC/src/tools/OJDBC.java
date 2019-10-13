@@ -1,10 +1,10 @@
 package tools;
 
-import daos.EmployeesDAO;
+import daos.LocationDAO;
 import daos.RegionDAO;
 import idaos.IRegionDAO;
 import java.util.List;
-import models.Employees;
+import models.Location;
 import models.Region;
 import tools.DBConnection;
 
@@ -14,6 +14,17 @@ public class OJDBC {
         for (Region reg : regions) {
             System.out.println(reg.getId());
             System.out.println(reg.getName());
+        }
+    }
+    
+    public static void cetakLocations(List<Location> locations) {
+        for (Location loc : locations) {
+            System.out.print(loc.getId() + " | ");
+            System.out.print(loc.getStreetAdress() + " | ");
+            System.out.print(loc.getPostalCode() + " | ");
+            System.out.print(loc.getCity() + " | ");
+            System.out.print(loc.getStateProvince() + " | ");
+            System.out.println(loc.getCountryId());
         }
     }
 
@@ -44,52 +55,48 @@ public class OJDBC {
 //            System.out.println(reg.getId());
 //            System.out.println(reg.getName());
 //        }
-        //RegionDAO rdao = new RegionDAO(connection.getConnection());
-        //Region r= new Region(5, "Jauh Sekali");
-        /*cetak(rdao.getAll());
-        System.out.println("================");
-        System.out.println("Coba Insert");
-        System.out.println("================");
-        System.out.println("Insert "+rdao.insert(r));
-        cetak(rdao.getAll());
-        r = new Region(5, "Nan Jauh dimato");
-        System.out.println("================");
-        System.out.println("Coba Update");
-        System.out.println("================");
-        System.out.println("Update "+rdao.update(r));
-        cetak(rdao.getAll());
-        System.out.println("================");
-        System.out.println("Coba GetById");
-        System.out.println("================");
-        cetak(rdao.getById(5));
-        System.out.println("================");
-        System.out.println("Coba Delete");
-        System.out.println("================");
-        System.out.println("Delete "+rdao.delete(5));
-        cetak(rdao.getAll());
-         */
         
-        EmployeesDAO edao = new EmployeesDAO(connection.getConnection());
-        /*for (Employees emp : edao.search("1002")) {
-            System.out.println(emp.getId());
-            System.out.println(emp.getFirstname());
-            System.out.println(emp.getLastname());
-            System.out.println(emp.getEmail());
-            System.out.println(emp.getPhone());
-            System.out.println(emp.getHiredate());
-            System.out.println(emp.getJobid());
-            System.out.println(emp.getSalary());
-            System.out.println(emp.getCommission());
-            System.out.println(emp.getManagerid());
-            System.out.println(emp.getDepid());
-        }*/
+        RegionDAO rdao = new RegionDAO(connection.getConnection());
+        Region r = new Region(5, "Jauh Sekali");
         
-        //Employees emp1 = new Employees(1002, "sandy", "putra", "sSandypu", "0896", "10-10-2019", "AD_VP", 1000,0 , 100, 80);
-        //edao.insert(emp1);
+        LocationDAO ldao = new LocationDAO(connection.getConnection());
+        cetakLocations(ldao.getAll()); System.out.println("++++");
         
-       //Employees emp2 = new Employees(1002, "putra", "sandy", "wawawawa", "0812", "10-10-2019", "IT_PROG", 4000, 0, 100, 80);
-       //edao.update(emp2);
+        cetakLocations(ldao.getById(1000)); System.out.println("++++"); //getById 
         
-       //edao.delete(1002);
+        cetakLocations(ldao.search("U")); System.out.println("++++"); //search
+        
+        Location l = new Location(3300, "JL Convair", "10620", "Jakarta Pusat", "Jakarta", "UK"); System.out.println("++++");
+        ldao.insert(l); System.out.println("++++");
+        
+        l = new Location(3300, "JL Convair", "55555", "Jakarta Pusat", "Jakarta", "UK"); System.out.println("++++");
+        ldao.update(l);
+        cetakLocations(ldao.getAll()); System.out.println("++++");
+        
+        ldao.delete(3300);
+        cetakLocations(ldao.getAll()); System.out.println("++++");
+        
+
+//        cetak(rdao.getAll());
+//        System.out.println("================");
+//        System.out.println("Coba Insert");
+//        System.out.println("================");
+//        System.out.println("Insert " + rdao.insert(r));
+//        cetak(rdao.getAll());
+//        r = new Region(5, "Nan Jauh dimato");
+//        System.out.println("================");
+//        System.out.println("Coba Update");
+//        System.out.println("================");
+//        System.out.println("Update " + rdao.update(r));
+//        cetak(rdao.getAll());
+//        System.out.println("================");
+//        System.out.println("Coba GetById");
+//        System.out.println("================");
+//        cetak(rdao.getById(5));
+//        System.out.println("================");
+//        System.out.println("Coba Delete");
+//        System.out.println("================");
+//        System.out.println("Delete " + rdao.delete(5));
+//        cetak(rdao.getAll());
     }
 }

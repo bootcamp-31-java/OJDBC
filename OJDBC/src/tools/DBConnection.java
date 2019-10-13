@@ -4,7 +4,9 @@ import java.sql.Connection;
 import oracle.jdbc.pool.OracleDataSource;
 
 public class DBConnection {
+    
     private Connection connection;
+    
     public Connection getConnection(){
         try{
             OracleDataSource ods = new OracleDataSource();
@@ -13,7 +15,7 @@ public class DBConnection {
             ods.setPortNumber(1521);
             ods.setUser("system");
             ods.setServiceName("XE");
-            ods.setPassword("root");
+            ods.setPassword("admin");
             this.connection = ods.getConnection();
         }
         catch (Exception e){
