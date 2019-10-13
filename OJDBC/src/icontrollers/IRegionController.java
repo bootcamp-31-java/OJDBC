@@ -10,7 +10,7 @@ import models.Region;
 
 /**
  *
- * @author User
+ * @author Faisal Dwi Rahmanto
  */
 public interface IRegionController {
 
@@ -19,11 +19,13 @@ public interface IRegionController {
     List<Region> getAll();
 
     Region getById(String id);
+    
+    //Region getByName(String name);
 
     String insert(String id, String name);
 
     List<Region> search(String key);
 
     String update(String id, String name);
-    
+
 }

@@ -7,22 +7,23 @@ package controllers;
 
 import icontrollers.IRegionController;
 import daos.RegionDAO;
+import models.Region;
+import idaos.IRegionDAO;
 import java.sql.Connection;
 import java.util.List;
-import models.Region;
 
 /**
  *
- * @author User
+ * @author Faisal Dwi Rahmanto
  */
 public class RegionController implements IRegionController {
-    
-    private RegionDAO rdao;
-    
+
+    private IRegionDAO rdao;
+
     public RegionController(Connection connection) {
         rdao = new RegionDAO(connection);
     }
-    
+
     @Override
     public String insert(String id, String name) {
         Region r = new Region(Integer.parseInt(id), name);
@@ -32,7 +33,7 @@ public class RegionController implements IRegionController {
             return "Insert data failed";
         }
     }
-    
+
     @Override
     public String update(String id, String name) {
         Region r = new Region(Integer.parseInt(id), name);
@@ -42,7 +43,7 @@ public class RegionController implements IRegionController {
             return "Update data failed";
         }
     }
-    
+
     @Override
     public String delete(String id) {
         if (rdao.delete(Integer.parseInt(id))) {
@@ -51,7 +52,7 @@ public class RegionController implements IRegionController {
             return "Delete data failed";
         }
     }
-    
+
     @Override
     public List<Region> getAll() {
         return rdao.getAll();
@@ -69,4 +70,9 @@ public class RegionController implements IRegionController {
     public List<Region> search(String key) {
         return rdao.search(key);
     }
+    
+  /*@Override
+    public List<Region> getByName(String name) {
+        return rdao.getByName(name);
+    }*/
 }

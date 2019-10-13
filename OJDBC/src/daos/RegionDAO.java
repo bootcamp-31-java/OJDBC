@@ -15,7 +15,7 @@ import models.Region;
 
 /**
  *
- * @author User
+ * @author Faisal Dwi Rahmanto
  */
 public class RegionDAO implements IRegionDAO {
 
@@ -127,4 +127,24 @@ public class RegionDAO implements IRegionDAO {
         return result;
     }
 
+    /*@Override
+    public List<Region> getByName(String name) {
+        List<Region> listRegion = new ArrayList<Region>();
+        String query = "SELECT * FROM HR.REGIONS WHERE REGION_NAME = ?";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, name);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                Region region = new Region((1), rs.getString(2));
+                listRegion.add(region);
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+        }
+        return listRegion;
+    } 
+    */
+    
 }
