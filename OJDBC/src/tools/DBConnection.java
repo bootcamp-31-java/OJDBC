@@ -13,7 +13,7 @@ public class DBConnection {
             ods.setPortNumber(1521);
             ods.setUser("system");
             ods.setServiceName("XE");
-            ods.setPassword("123");
+            ods.setPassword("root");
             this.connection = ods.getConnection();
         }
         catch (Exception e){
