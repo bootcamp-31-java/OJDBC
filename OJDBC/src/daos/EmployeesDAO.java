@@ -150,4 +150,52 @@ public class EmployeesDAO implements IEmployeesDAO{
         }
         return result;
     }
+    
+    public List<String> getJobid() {
+        List<String> listIdCountry = new ArrayList<>();
+        String query = "select job_id from hr.jobs";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                String c = resultSet.getString(1);
+                listIdCountry.add(c);
+            }
+        } catch (Exception e) {
+            e.getStackTrace();
+        }
+        return listIdCountry;
+    }
+    
+        public List<String> getManid() {
+        List<String> listIdCountry = new ArrayList<>();
+        String query = "select employee_id , last_name from hr.employees order by employee_id asc";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                String c = resultSet.getString(1);
+                listIdCountry.add(c);
+            }
+        } catch (Exception e) {
+            e.getStackTrace();
+        }
+        return listIdCountry;
+    }
+        public List<String> getDepid() {
+        List<String> listIdCountry = new ArrayList<>();
+        String query = "select Department_id from hr.departments";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                String c = resultSet.getString(1);
+                listIdCountry.add(c);
+            }
+        } catch (Exception e) {
+            e.getStackTrace();
+        }
+        return listIdCountry;
+    }
+    
 }

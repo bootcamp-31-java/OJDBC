@@ -11,6 +11,7 @@ import icontrollers.IEmployeesController;
 import java.awt.Component;
 import java.sql.Connection;
 import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -55,7 +56,29 @@ public class VEmployees extends javax.swing.JFrame {
         tabelemp.addColumn("COMMISSION");
         tabelemp.addColumn("MANAGER ID");
         tabelemp.addColumn("DEPARTMENT ID");
+        cmbjobid.setModel(new DefaultComboBoxModel<>(new String[]{
+            "select job ID"
+        }));
+        iecon.getJobid().forEach((s) -> {
+            cmbjobid.addItem(s);
+        });
+        cmbmanid.setModel(new DefaultComboBoxModel<>(new String[]{
+            "select manager ID"
+        }));
+        iecon.getManid().forEach((s) -> {
+            cmbmanid.addItem(s);
+        });
+        cmbdepid.setModel(new DefaultComboBoxModel<>(new String[]{
+            "select Department ID"
+        }));
+        iecon.getDepid().forEach((s) -> {
+            cmbdepid.addItem(s);
+        });
         isitabel();
+    }
+
+    public JComboBox<String> getCmbjobid() {
+        return cmbjobid;
     }
 
     public JTextField getTxtsearch() {
@@ -92,11 +115,12 @@ public class VEmployees extends javax.swing.JFrame {
         txtemail.setText("");
         txtphone.setText("");
         txthdate.setText("");
-        txtjobid.setText("");
+//        txtjobid.setText("");
+//        cmbjobid.setSelectedItem(null);
         txtsal.setText("");
         txtcom.setText("");
-        txtmanid.setText("");
-        txtdepid.setText("");
+//        txtmanid.setText("");
+//        txtdepid.setText("");
     }
 
     public void isitabel() {
@@ -163,11 +187,15 @@ public class VEmployees extends javax.swing.JFrame {
 
     }
 
-    
-    
-
-    
-
+//    public void tampiljobid() {
+//        cmbjobid.setModel(new DefaultComboBoxModel<>(new String[]{
+//            "select job ID"
+//        }));
+//        iecon.getJobid().forEach((s) -> {
+//            cmbjobid.addItem(s);
+//        });
+//        isitabel();
+//    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -185,11 +213,8 @@ public class VEmployees extends javax.swing.JFrame {
         txtemail = new javax.swing.JTextField();
         txtphone = new javax.swing.JTextField();
         txthdate = new javax.swing.JTextField();
-        txtjobid = new javax.swing.JTextField();
         txtsal = new javax.swing.JTextField();
         txtcom = new javax.swing.JTextField();
-        txtmanid = new javax.swing.JTextField();
-        txtdepid = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -210,6 +235,9 @@ public class VEmployees extends javax.swing.JFrame {
         txtsearch = new javax.swing.JTextField();
         bsearch = new javax.swing.JButton();
         jLabel13 = new javax.swing.JLabel();
+        cmbjobid = new javax.swing.JComboBox<>();
+        cmbmanid = new javax.swing.JComboBox<>();
+        cmbdepid = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -325,6 +353,17 @@ public class VEmployees extends javax.swing.JFrame {
 
         jLabel13.setText("* dd-mm-yyyy");
 
+        cmbjobid.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbjobid.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmbjobidItemStateChanged(evt);
+            }
+        });
+
+        cmbmanid.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        cmbdepid.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -333,10 +372,6 @@ public class VEmployees extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jScrollPane1)
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(398, 398, 398)
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -356,7 +391,7 @@ public class VEmployees extends javax.swing.JFrame {
                                 .addComponent(txtfname, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
                                 .addComponent(txtempid, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(32, 32, 32)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -369,23 +404,29 @@ public class VEmployees extends javax.swing.JFrame {
                             .addComponent(txtsal, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtjobid, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtphone, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(txtphone, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                    .addComponent(cmbjobid, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                    .addComponent(txthdate, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jLabel13)))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel12)
+                                            .addComponent(jLabel11)
+                                            .addComponent(jLabel10))
+                                        .addGap(54, 54, 54))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(txthdate, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel13)))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel12)
-                                    .addComponent(jLabel11)
-                                    .addComponent(jLabel10))
-                                .addGap(54, 54, 54)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtcom)
-                                    .addComponent(txtmanid)
-                                    .addComponent(txtdepid, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 104, Short.MAX_VALUE))
+                                        .addComponent(jLabel1)
+                                        .addGap(137, 137, 137)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(cmbmanid, 0, 108, Short.MAX_VALUE)
+                                    .addComponent(txtcom, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cmbdepid, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 132, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(txtsearch, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -425,22 +466,22 @@ public class VEmployees extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtlname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtjobid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4)
                             .addComponent(jLabel8)
-                            .addComponent(bdelete)))
+                            .addComponent(bdelete)
+                            .addComponent(cmbjobid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtcom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel10))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtmanid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel11))
+                            .addComponent(jLabel11)
+                            .addComponent(cmbmanid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtdepid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel12))))
+                            .addComponent(jLabel12)
+                            .addComponent(cmbdepid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtemail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -480,11 +521,13 @@ public class VEmployees extends javax.swing.JFrame {
         txtemail.setText(tabelemp.getValueAt(i, 3).toString());
         txtphone.setText(tabelemp.getValueAt(i, 4).toString());
         txthdate.setText(tabelemp.getValueAt(i, 5).toString());
-        txtjobid.setText(tabelemp.getValueAt(i, 6).toString());
+        cmbjobid.setSelectedItem(tabelemp.getValueAt(i, 6).toString());
         txtsal.setText(tabelemp.getValueAt(i, 7).toString());
         txtcom.setText(tabelemp.getValueAt(i, 8).toString());
-        txtmanid.setText(tabelemp.getValueAt(i, 9).toString());
-        txtdepid.setText(tabelemp.getValueAt(i, 10).toString());
+//        txtmanid.setText(tabelemp.getValueAt(i, 9).toString());
+        cmbmanid.setSelectedItem(tabelemp.getValueAt(i, 9).toString());
+//        txtdepid.setText(tabelemp.getValueAt(i, 10).toString());
+        cmbdepid.setSelectedItem(tabelemp.getValueAt(i, 10).toString());
         txtempid.setEditable(false);
         bsimpan.setEnabled(false);
     }//GEN-LAST:event_tblempMouseClicked
@@ -494,11 +537,11 @@ public class VEmployees extends javax.swing.JFrame {
     }//GEN-LAST:event_txtlnameActionPerformed
 
     private void bsimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bsimpanActionPerformed
-        if (txtempid.getText().equals("") || (txtfname.getText().equals("")) || (txtlname.getText().equals("")) || (txtemail.getText().equals("")) || (txtphone.getText().equals("")) || (txthdate.getText().equals("")) || (txtjobid.getText().equals("")) || (txtsal.getText().equals("")) || (txtcom.getText().equals("")) || (txtmanid.getText().equals("")) || (txtdepid.getText().equals(""))) {
-            JOptionPane.showMessageDialog(rootPane, "Mohon Data di Isi Secara Lengkap LOL", "Warning", JOptionPane.INFORMATION_MESSAGE);
+        if (txtempid.getText().equals("") || (txtfname.getText().equals("")) || (txtlname.getText().equals("")) || (txtemail.getText().equals("")) || (txtphone.getText().equals("")) || (txthdate.getText().equals("")) || (cmbjobid.getSelectedItem().toString().equals("")) || (txtsal.getText().equals("")) || (txtcom.getText().equals("")) || (cmbmanid.getSelectedItem().toString().equals("")) || (cmbdepid.getSelectedItem().toString().equals(""))) {
+            JOptionPane.showMessageDialog(rootPane, "Mohon Data di Isi Secara Lengkap !", "Warning", JOptionPane.INFORMATION_MESSAGE);
             bersih();
         } else {
-            iecon.insert(txtempid.getText(), txtfname.getText(), txtlname.getText(), txtemail.getText(), txtphone.getText(), txthdate.getText(), txtjobid.getText(), txtsal.getText(), txtcom.getText(), txtmanid.getText(), txtdepid.getText());
+            iecon.insert(txtempid.getText(), txtfname.getText(), txtlname.getText(), txtemail.getText(), txtphone.getText(), txthdate.getText(), cmbjobid.getSelectedItem().toString(), txtsal.getText(), txtcom.getText(), cmbmanid.getSelectedItem().toString(), cmbdepid.getSelectedItem().toString());
             isitabel();
             JOptionPane.showMessageDialog(rootPane, "Data Berhasil Disimpan", "Saved", JOptionPane.INFORMATION_MESSAGE);
         }
@@ -507,10 +550,10 @@ public class VEmployees extends javax.swing.JFrame {
     }//GEN-LAST:event_bsimpanActionPerformed
 
     private void bupdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bupdateActionPerformed
-        if (txtempid.getText().equals("") || (txtfname.getText().equals("")) || (txtlname.getText().equals("")) || (txtemail.getText().equals("")) || (txtphone.getText().equals("")) || (txthdate.getText().equals("")) || (txtjobid.getText().equals("")) || (txtsal.getText().equals("")) || (txtcom.getText().equals("")) || (txtmanid.getText().equals("")) || (txtdepid.getText().equals(""))) {
+        if (txtempid.getText().equals("") || (txtfname.getText().equals("")) || (txtlname.getText().equals("")) || (txtemail.getText().equals("")) || (txtphone.getText().equals("")) || (txthdate.getText().equals("")) || (cmbjobid.getSelectedItem().toString().equals("")) || (txtsal.getText().equals("")) || (txtcom.getText().equals("")) || (cmbmanid.getSelectedItem().toString().equals("")) || (cmbdepid.getSelectedItem().toString().equals(""))) {
             JOptionPane.showMessageDialog(rootPane, "Mohon Data di Isi Secara Lengkap !", "Warning", JOptionPane.INFORMATION_MESSAGE);
         } else {
-            iecon.update(txtempid.getText(), txtfname.getText(), txtlname.getText(), txtemail.getText(), txtphone.getText(), txthdate.getText(), txtjobid.getText(), txtsal.getText(), txtcom.getText(), txtmanid.getText(), txtdepid.getText());
+            iecon.update(txtempid.getText(), txtfname.getText(), txtlname.getText(), txtemail.getText(), txtphone.getText(), txthdate.getText(), cmbjobid.getSelectedItem().toString(), txtsal.getText(), txtcom.getText(), cmbmanid.getSelectedItem().toString(), cmbdepid.getSelectedItem().toString());
 
             txtempid.setEditable(true);
             bsimpan.setEnabled(true);
@@ -560,6 +603,11 @@ public class VEmployees extends javax.swing.JFrame {
         Cari();
     }//GEN-LAST:event_bsearchActionPerformed
 
+    private void cmbjobidItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbjobidItemStateChanged
+        // TODO add your handling code here:
+        //tampiljobid();
+    }//GEN-LAST:event_cmbjobidItemStateChanged
+
     /**
      * @param args the command line arguments
      */
@@ -602,6 +650,9 @@ public class VEmployees extends javax.swing.JFrame {
     private javax.swing.JButton bsearch;
     private javax.swing.JButton bsimpan;
     private javax.swing.JButton bupdate;
+    private javax.swing.JComboBox<String> cmbdepid;
+    private javax.swing.JComboBox<String> cmbjobid;
+    private javax.swing.JComboBox<String> cmbmanid;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -618,14 +669,11 @@ public class VEmployees extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblemp;
     private javax.swing.JTextField txtcom;
-    private javax.swing.JTextField txtdepid;
     private javax.swing.JTextField txtemail;
     private javax.swing.JTextField txtempid;
     private javax.swing.JTextField txtfname;
     private javax.swing.JTextField txthdate;
-    private javax.swing.JTextField txtjobid;
     private javax.swing.JTextField txtlname;
-    private javax.swing.JTextField txtmanid;
     private javax.swing.JTextField txtphone;
     private javax.swing.JTextField txtsal;
     private javax.swing.JTextField txtsearch;

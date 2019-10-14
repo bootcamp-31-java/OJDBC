@@ -23,7 +23,7 @@ import views.VEmployees;
 public class EmployeesController implements IEmployeesController {
 
     private EmployeesDAO edao;
-    
+    VEmployees form;
 
     public EmployeesController(Connection connection) {
         edao = new EmployeesDAO(connection);
@@ -105,4 +105,17 @@ public class EmployeesController implements IEmployeesController {
         }
 
     }
+
+    public List<String> getJobid() {
+        return edao.getJobid();
+    }
+
+    public List<String> getManid() {
+        return edao.getManid();
+    }
+
+    public List<String> getDepid() {
+        return edao.getDepid();
+    }
+
 }

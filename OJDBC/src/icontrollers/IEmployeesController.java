@@ -18,6 +18,12 @@ public interface IEmployeesController {
     List<Employees> getAll();
 
     Employees getById(String id);
+    
+    List<String> getJobid();
+    
+    List<String> getManid();
+    
+    List<String> getDepid();
 
     String insert(String id, String firstname, String lastname, String email, String phone, String hiredate, String jobid, String salary, String commission, String managerid, String depid);
 
