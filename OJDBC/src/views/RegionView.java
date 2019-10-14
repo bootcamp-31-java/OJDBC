@@ -26,6 +26,7 @@ public class RegionView extends javax.swing.JFrame {
      */
     public RegionView() {
         initComponents();
+        setLocationRelativeTo(this);
 
         TextField_Id = new javax.swing.JTextField();
         TextField_Name = new javax.swing.JTextField();

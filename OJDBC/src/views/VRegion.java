@@ -31,6 +31,7 @@ public class VRegion extends javax.swing.JFrame {
 
     public VRegion() {
         initComponents();
+        setLocationRelativeTo(this);
         datalist = new DefaultTableModel();
         jTable1.setModel(datalist);
         datalist.addColumn("Region_ID");

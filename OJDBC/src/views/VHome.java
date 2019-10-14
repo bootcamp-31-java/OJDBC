@@ -18,6 +18,7 @@ public class VHome extends javax.swing.JFrame {
      */
     public VHome() {
         initComponents();
+        setLocationRelativeTo(this);
     }
 
     /**

@@ -26,6 +26,7 @@ public class JobView extends javax.swing.JFrame {
      */
     public JobView() {
         initComponents();
+        setLocationRelativeTo(this);
         addRowToJTable();
     }
     private List<Job> list;

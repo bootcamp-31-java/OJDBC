@@ -30,6 +30,7 @@ public class VDepartment extends javax.swing.JFrame {
      */
     public VDepartment() {
         initComponents();
+        setLocationRelativeTo(this);
         datalist = new DefaultTableModel();
         jTable1.setModel(datalist);
         datalist.addColumn("Department_ID");

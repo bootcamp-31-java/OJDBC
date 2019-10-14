@@ -29,6 +29,7 @@ public class LocationView extends javax.swing.JFrame {
      */
     public LocationView() {
         initComponents();
+        setLocationRelativeTo(this);
         addItemCountryID();
         addRowToJTable();
     }
