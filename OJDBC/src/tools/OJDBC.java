@@ -8,6 +8,7 @@ import models.Job;
 import models.Region;
 import tools.DBConnection;
 import views.RegionView;
+import views.VHome;
 
 public class OJDBC {
 
@@ -31,6 +32,8 @@ public class OJDBC {
         DBConnection connection = new DBConnection();
         System.out.println(connection.getConnection());
 
+        VHome start = new VHome();
+        start.setVisible(true);
 //        //cara 2 pake method setter
 //        Region region = new Region();
 //        region.setId(0);

@@ -44,6 +44,13 @@ public class JobView extends javax.swing.JFrame {
             model.addRow(rowData);
         }
     }
+     public void refresh() {
+        textfieldJobID.setText("");
+        textfieldJobTitle.setText("");
+        textfieldMinSalary.setText("");
+        textfieldMaxSalary.setText("");
+        textfieldSearch.setText("");
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -77,6 +84,9 @@ public class JobView extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tableGetAll = new javax.swing.JTable();
         keterangan = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        buttonShowAll = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         jLabel8.setFont(new java.awt.Font("Montserrat", 1, 11)); // NOI18N
         jLabel8.setText("Search by ID");
@@ -110,6 +120,12 @@ public class JobView extends javax.swing.JFrame {
         jLabel2.setText("INSERT NEW JOB");
 
         jLabel3.setText("Job Title");
+
+        textfieldJobID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textfieldJobIDActionPerformed(evt);
+            }
+        });
 
         jLabel4.setText("Min Salary");
 
@@ -173,51 +189,74 @@ public class JobView extends javax.swing.JFrame {
 
         keterangan.setText("   ");
 
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel7.setText("Delete by ID");
+
+        buttonShowAll.setText("Show All");
+        buttonShowAll.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonShowAllActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("Back");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(31, 31, 31)
+                .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(buttonInsert)
-                        .addGap(24, 24, 24)
-                        .addComponent(buttonUpdate)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(buttonDelete))
+                        .addComponent(keterangan, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 278, Short.MAX_VALUE)
+                        .addComponent(jButton1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
+                                .addGap(31, 31, 31)
+                                .addComponent(jLabel2)
+                                .addGap(3, 3, 3))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel3))
-                                .addGap(28, 28, 28)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel1))
+                                .addGap(32, 32, 32)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(textfieldJobID, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(textfieldJobTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(textfieldJobTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(textfieldJobID, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(40, 40, 40)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel4)
-                                    .addComponent(jLabel5)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(3, 3, 3)))
-                        .addGap(25, 25, 25)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(textfieldMinSalary)
-                            .addComponent(textfieldMaxSalary)))
+                                    .addComponent(jLabel5))))
+                        .addGap(58, 58, 58)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(textfieldMinSalary, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(textfieldMaxSalary, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel7)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(buttonDelete))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(buttonInsert)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(buttonUpdate)))))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(textfieldSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(buttonSearch))
-                            .addComponent(jLabel6)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(keterangan, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 112, Short.MAX_VALUE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(textfieldSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(buttonSearch)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(buttonShowAll)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -240,19 +279,23 @@ public class JobView extends javax.swing.JFrame {
                 .addGap(39, 39, 39)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(buttonInsert)
-                    .addComponent(buttonUpdate)
-                    .addComponent(buttonDelete))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(buttonUpdate))
+                .addGap(3, 3, 3)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(buttonDelete)
+                    .addComponent(jLabel7)
+                    .addComponent(buttonSearch)
                     .addComponent(textfieldSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buttonSearch))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(keterangan)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(buttonShowAll))
+                .addGap(35, 35, 35)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(keterangan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton1))
+                .addContainerGap())
         );
 
         pack();
@@ -263,8 +306,14 @@ public class JobView extends javax.swing.JFrame {
         String jobTitle = textfieldJobTitle.getText();
         String minSalary = textfieldMinSalary.getText();
         String maxSalary = textfieldMaxSalary.getText();
+        
+        if (jobId.length()==0 || jobTitle.length()==0){
+            JOptionPane.showMessageDialog(null, "The Job ID and Job Title field must be filled in first");
+        }
+        else{
         keterangan.setText(jc.insert(jobId, jobTitle, Integer.parseInt(minSalary), Integer.parseInt(maxSalary)));
         addRowToJTable();
+        refresh();}
     }//GEN-LAST:event_buttonInsertActionPerformed
 
     private void buttonUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonUpdateActionPerformed
@@ -272,14 +321,24 @@ public class JobView extends javax.swing.JFrame {
         String jobTitle = textfieldJobTitle.getText();
         String minSalary = textfieldMinSalary.getText();
         String maxSalary = textfieldMaxSalary.getText();
+        if (jobId.length()==0 || jobTitle.length()==0){
+            JOptionPane.showMessageDialog(null, "The Job ID and Job Title field must be filled in first");
+        }
+        else{
         keterangan.setText(jc.update(jobId, jobTitle, Integer.parseInt(minSalary), Integer.parseInt(maxSalary)));
         addRowToJTable();
+        refresh();}
     }//GEN-LAST:event_buttonUpdateActionPerformed
 
     private void buttonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeleteActionPerformed
         String jobId = textfieldJobID.getText();
+        if (jobId.length()==0){
+            JOptionPane.showMessageDialog(null, "The Job ID field must be filled in first");
+        }
+        else{
         keterangan.setText(jc.delete(jobId));
         addRowToJTable();
+        refresh();}
     }//GEN-LAST:event_buttonDeleteActionPerformed
 
     private void buttonSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSearchActionPerformed
@@ -297,11 +356,29 @@ public class JobView extends javax.swing.JFrame {
             rowData[3] = job.getMax_salary();
             model.addRow(rowData);
         }
+        
     }//GEN-LAST:event_buttonSearchActionPerformed
 
     private void textfieldSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textfieldSearchKeyReleased
        
     }//GEN-LAST:event_textfieldSearchKeyReleased
+
+    private void textfieldJobIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textfieldJobIDActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textfieldJobIDActionPerformed
+
+    private void buttonShowAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonShowAllActionPerformed
+        addRowToJTable();
+        refresh();
+    }//GEN-LAST:event_buttonShowAllActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        int ok = JOptionPane.showConfirmDialog(null, "Anda ingin keluar?", "Konfirmasi", JOptionPane.YES_NO_OPTION);
+        if (ok == 0) {
+            dispose();
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -342,7 +419,9 @@ public class JobView extends javax.swing.JFrame {
     private javax.swing.JButton buttonDelete;
     private javax.swing.JButton buttonInsert;
     private javax.swing.JButton buttonSearch;
+    private javax.swing.JButton buttonShowAll;
     private javax.swing.JButton buttonUpdate;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -350,6 +429,7 @@ public class JobView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
