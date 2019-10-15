@@ -29,6 +29,10 @@ public class LocationDAO implements ILocationDAO {
     public List<Location> getAll() {
         List<Location> listLocation = new ArrayList<>();
         String query = "select * from hr.locations order by 1";
+//        String query = "select l.location_id, l.street_address, l.postal_code, l.city, l.state_province, c.country_name "
+//                + "from locations l, countries c "
+//                + "where l.country_id=c.country_id "
+//                + "order by 1";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -46,6 +50,27 @@ public class LocationDAO implements ILocationDAO {
         return listLocation;
     }
 
+    @Override
+    public List<Location> getById(int id) {
+        List<Location> listLocation = new ArrayList<>();
+        String query = "SELECT * FROM HR.locations WHERE location_ID = (?)";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                Location l = new Location(resultSet.getInt(1),
+                        resultSet.getString(2), resultSet.getString(3),
+                        resultSet.getString(4), resultSet.getString(5),
+                        resultSet.getString(6));
+                listLocation.add(l);
+            }
+        } catch (Exception e) {
+            e.getStackTrace();
+        }
+        return listLocation;
+    }
+    
     public List<String> getIdCountry() {
         List<String> listIdCountry = new ArrayList<>();
         String query = "select country_id from hr.countries";
@@ -93,7 +118,47 @@ public class LocationDAO implements ILocationDAO {
         }
         return listLocation;
     }
-
+    /**
+     * Method untuk save data, cek kondisi data sudah ada atau belum
+     * jika data tidak ada akan melakukan insert sebaliknya akan melakukan update
+     * @param l
+     * @return boolean
+     */
+    public boolean save(Location l) {
+        boolean result = false;
+        List<Location> list = getById(l.getId());
+        //CARA I
+//        String query;
+//        if (list.isEmpty()) {
+//            query = "insert into hr.locations(street_address, postal_code, city, "
+//                + "state_province, country_id, location_id) values (?,?,?,?,?,?)";
+//        }else{
+//            query = "update hr.locations set street_address = ?, postal_code = ?, city = ?,"
+//                + "state_province = ?, country_id = ? where location_id=?";
+//        }
+        //CARA II
+        String query = list.isEmpty()
+                ? "insert into hr.locations(street_address, postal_code, city, "
+                + "state_province, country_id, location_id) values (?,?,?,?,?,?)"
+                : "update hr.locations set street_address = ?, postal_code = ?, city = ?,"
+                + "state_province = ?, country_id = ? where location_id=?";
+        
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(6, l.getId());
+            preparedStatement.setString(1, l.getStreetAdress());
+            preparedStatement.setString(2, l.getPostalCode());
+            preparedStatement.setString(3, l.getCity());
+            preparedStatement.setString(4, l.getStateProvince());
+            preparedStatement.setString(5, l.getCountryId());
+            ResultSet resultSet = preparedStatement.executeQuery();
+            result = true;
+        } catch (Exception e) {
+            e.getStackTrace();
+        }
+        return result;
+    }
+    
     @Override
     public boolean insert(Location l) {
         boolean result = false;
@@ -158,24 +223,4 @@ public class LocationDAO implements ILocationDAO {
         return result;
     }
 
-    @Override
-    public List<Location> getById(int id) {
-        List<Location> listLocation = new ArrayList<>();
-        String query = "SELECT * FROM HR.locations WHERE location_ID = (?)";
-        try {
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setInt(1, id);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                Location l = new Location(resultSet.getInt(1),
-                        resultSet.getString(2), resultSet.getString(3),
-                        resultSet.getString(4), resultSet.getString(5),
-                        resultSet.getString(6));
-                listLocation.add(l);
-            }
-        } catch (Exception e) {
-            e.getStackTrace();
-        }
-        return listLocation;
-    }
 }

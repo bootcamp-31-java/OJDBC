@@ -1,10 +1,14 @@
 package tools;
 
+import daos.AccountDAO;
 import daos.JobDAO;
+import daos.LocationDAO;
 import daos.RegionDAO;
 import idaos.IRegionDAO;
 import java.util.List;
+import models.Account;
 import models.Job;
+import models.Location;
 import models.Region;
 import tools.DBConnection;
 import views.RegionView;
@@ -31,9 +35,45 @@ public class OJDBC {
     public static void main(String[] args) {
         DBConnection connection = new DBConnection();
         System.out.println(connection.getConnection());
+        
+        BCrypt bcrypt = new BCrypt();
+//        String password = "muhammadrezaaditya";
+//        String np =  bcrypt.hashpw(password, bcrypt.gensalt(5));
+//        String npw =  bcrypt.hashpw(password, bcrypt.gensalt(5));
+//        String npwp =  bcrypt.hashpw(password, bcrypt.gensalt(15));
+//        System.out.println(np + " : " + np.length());
+//        System.out.println(npw + " : " + npw.length());
+//        System.out.println(npwp + " : " + npwp.length());
+//        
+//        String n = "muhammadrezaaditya";
+//        System.out.println(bcrypt.checkpw(n, np) ? "benar" : "salah");
+//        System.out.println(bcrypt.checkpw(n, npw) ? "benar" : "salah");
+        
+//       
+        AccountDAO adao = new AccountDAO(connection.getConnection());
+        //COBA REGISTER
+        String pass = "admin";
+        Account a = new Account(100, "reza", bcrypt.hashpw(pass, bcrypt.gensalt()));
+        System.out.println(adao.insert(a) ? "benar" : "salah");
+        System.out.println(a.getPassword());
+        System.out.println("================\nLOGIN");
+        //COBA LOGIN
+        List<Account> la = adao.getById(100);
+        String typePass = "admin";
+        System.out.println(la.get(0).getUsername());
+        System.out.println(la.get(0).getPassword());
+        System.out.println(bcrypt.checkpw(typePass, la.get(0).getPassword()) ? "berhasil" : "gagal");
+        
+        
+//        LocationDAO ldao = new LocationDAO(connection.getConnection());
+//        List<Location> ll = ldao.getById(3400);
+//        ll.get(0).getPostalCode();
+//        Location l = new Location(3400, "qwe", "qwe", "qwe", "qwe", "AU");
+//        ldao.insert(l);
+   
+//        VHome start = new VHome();
+//        start.setVisible(true);
 
-        VHome start = new VHome();
-        start.setVisible(true);
 //        //cara 2 pake method setter
 //        Region region = new Region();
 //        region.setId(0);
@@ -44,15 +84,15 @@ public class OJDBC {
 //        Region r = new Region(1, "Region New");
 //        System.err.println(r.getId()+ " " + r.getName());
 //        RegionDAO rdao = new RegionDAO(connection.getConnection());
-        //insert
+                //insert
 //        Region r1 = new Region(8, "Helos");
 //        rdao.insert(r1);
-        //update
+                //update
 //        Region r1 = new Region(6, "Helowww");
 //        rdao.update(r1);
 //        //delete
 //        rdao.delete(7);
-        //Manual Test DAO getAll
+                //Manual Test DAO getAll
 //              JobDAO jdao = new JobDAO(connection.getConnection());
 // 
 //        for (Job reg : jdao.getAll()){
@@ -88,10 +128,10 @@ public class OJDBC {
 //        RegionView start = new RegionView();
 //        start.setVisible(true);
 
-        JobDAO jdao = new JobDAO(connection.getConnection());
-        Job j = new Job("MODEL", "ASIK", 10, 20);
-
-        cetakJob(jdao.search("10"));
+//        JobDAO jdao = new JobDAO(connection.getConnection());
+//        Job j = new Job("MODEL", "ASIK", 10, 20);
+//
+//        cetakJob(jdao.search("10"));
 //        System.out.println("================");
 //        System.out.println("Coba Insert");
 //        System.out.println("================");
